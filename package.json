@@ -1,0 +1,19 @@
+{
+  "name": "analytics-platform",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "bun run --cwd packages/api dev",
+    "dev:dashboard": "bun run --cwd packages/dashboard dev",
+    "build": "bun run build:client && bun run build:api && bun run build:dashboard",
+    "build:api": "bun run --cwd packages/api build",
+    "build:dashboard": "bun run --cwd packages/dashboard build",
+    "build:client": "bun run --cwd packages/client build"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

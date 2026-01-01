@@ -1,0 +1,29 @@
+{
+  "name": "@analytics/client",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target browser --sourcemap=external && tsc --emitDeclarationOnly --outDir dist",
+    "prepublishOnly": "bun run build"
+  },
+  "dependencies": {
+    "@trpc/client": "^10.45.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.256",
+    "bun-types": "^1.0.0"
+  },
+  "keywords": [
+    "analytics",
+    "tracking",
+    "chrome-extension",
+    "events"
+  ],
+  "author": "",
+  "license": "MIT"
+}

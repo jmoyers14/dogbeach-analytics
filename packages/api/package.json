@@ -1,0 +1,22 @@
+{
+  "name": "@analytics/api",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target bun",
+    "start": "bun run dist/index.js"
+  },
+  "dependencies": {
+    "@trpc/server": "^10.45.0",
+    "mongoose": "^8.1.0",
+    "tsyringe": "^4.8.0",
+    "reflect-metadata": "^0.2.1",
+    "zod": "^3.22.4",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "bun-types": "^1.0.0"
+  }
+}
