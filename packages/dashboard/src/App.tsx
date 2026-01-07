@@ -63,15 +63,15 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
                 <div className="min-h-screen bg-gray-50">
-                    <nav className="bg-white shadow-sm border-b border-gray-200">
+                    <nav className="bg-black shadow-sm border-b border-black">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="flex justify-between items-center h-16">
-                                <h1 className="text-xl font-semibold text-gray-900">
-                                    Analytics Dashboard
+                                <h1 className="text-xl font-semibold text-white">
+                                    DOGBEACH ANALYTICS
                                 </h1>
                                 <button
                                     onClick={handleLogout}
-                                    className="text-sm text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors"
+                                    className="text-sm text-white hover:text-gray-300 px-3 py-2 rounded-md hover:bg-gray-900 transition-colors"
                                 >
                                     Logout
                                 </button>
