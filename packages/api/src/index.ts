@@ -1,4 +1,4 @@
-import './container.js';
+import './services/index.js';
 import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import mongoose from 'mongoose';
 import cors from 'cors';
