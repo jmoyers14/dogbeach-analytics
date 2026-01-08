@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient, updateTRPCClient } from "./trpc";
 import Projects from "./pages/Projects";
+import ProjectDetail from "./pages/ProjectDetail";
 
 const ADMIN_SECRET_KEY = "analytics_admin_secret";
 
@@ -62,6 +64,7 @@ function App() {
 
     return (
         <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
                 <div className="min-h-screen bg-gray-50">
                     <nav className="bg-black shadow-sm border-b border-black">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,9 +82,13 @@ function App() {
                         </div>
                     </nav>
                     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                        <Projects />
+                        <Routes>
+                            <Route path="/" element={<Projects />} />
+                            <Route path="/project/:projectId" element={<ProjectDetail />} />
+                        </Routes>
                     </main>
                 </div>
+            </BrowserRouter>
         </QueryClientProvider>
     );
 }

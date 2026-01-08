@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { trpc } from "../trpc";
 
@@ -185,6 +186,7 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, onDelete, onRegenerateKey }: ProjectCardProps) {
+    const navigate = useNavigate();
     const [showApiKey, setShowApiKey] = useState(false);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
@@ -211,8 +213,15 @@ function ProjectCard({ project, onDelete, onRegenerateKey }: ProjectCardProps) {
 
     const stats = statsQuery.data;
 
+    const handleCardClick = () => {
+        navigate(`/project/${project.projectId}`);
+    };
+
     return (
-        <div className="bg-white rounded-lg border-2 border-black p-6">
+        <div
+            className="bg-white rounded-lg border-2 border-black p-6 cursor-pointer hover:shadow-lg transition-shadow"
+            onClick={handleCardClick}
+        >
             <div className="flex justify-between items-start mb-4">
                 <div>
                     <h3 className="text-xl font-semibold text-gray-900">
@@ -257,7 +266,7 @@ function ProjectCard({ project, onDelete, onRegenerateKey }: ProjectCardProps) {
                 </div>
             ) : null}
 
-            <div className="mb-4">
+            <div className="mb-4" onClick={(e) => e.stopPropagation()}>
                 <button
                     onClick={() => setShowApiKey(!showApiKey)}
                     className="text-sm text-blue-600 hover:text-blue-700 underline"
@@ -273,7 +282,7 @@ function ProjectCard({ project, onDelete, onRegenerateKey }: ProjectCardProps) {
                 )}
             </div>
 
-            <div className="flex space-x-2">
+            <div className="flex space-x-2" onClick={(e) => e.stopPropagation()}>
                 <button
                     onClick={() => {
                         if (
@@ -302,7 +311,7 @@ function ProjectCard({ project, onDelete, onRegenerateKey }: ProjectCardProps) {
             </div>
 
             {showDeleteConfirm && (
-                <div className="mt-4 bg-red-50 border border-red-200 rounded p-4">
+                <div className="mt-4 bg-red-50 border border-red-200 rounded p-4" onClick={(e) => e.stopPropagation()}>
                     <p className="text-sm text-red-800 mb-3">
                         Are you sure? This will delete the project and all its
                         events permanently.

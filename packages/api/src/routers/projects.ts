@@ -104,8 +104,8 @@ export const projectsRouter = router({
     .input(
       z.object({
         projectId: projectIdSchema,
-        startDate: z.date().optional(),
-        endDate: z.date().optional(),
+        startDate: z.coerce.date().optional(),
+        endDate: z.coerce.date().optional(),
       })
     )
     .query(async ({ ctx, input }) => {
@@ -121,6 +121,33 @@ export const projectsRouter = router({
       }
 
       return await ctx.services.analyticsService.getProjectStats(
+        input.projectId,
+        input.startDate,
+        input.endDate
+      );
+    }),
+
+  dailyActiveUsers: adminProcedure
+    .input(
+      z.object({
+        projectId: projectIdSchema,
+        startDate: z.coerce.date(),
+        endDate: z.coerce.date(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const project = await ctx.services.projectService.getProject(
+        input.projectId
+      );
+
+      if (!project) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Project not found',
+        });
+      }
+
+      return await ctx.services.analyticsService.getDailyActiveUsers(
         input.projectId,
         input.startDate,
         input.endDate
