@@ -5,14 +5,20 @@ import type { AppRouter } from "@analytics/api";
 
 export const queryClient = new QueryClient();
 
-// Store the admin secret
 let adminSecret: string | null = null;
 
-// Create client with lazy headers
+const getApiUrl = () => {
+    if (import.meta.env.VITE_API_URL) {
+        return import.meta.env.VITE_API_URL;
+    }
+
+    return "http://localhost:3000";
+};
+
 const trpcClient = createTRPCClient<AppRouter>({
     links: [
         httpBatchLink({
-            url: "http://localhost:3000",
+            url: getApiUrl(),
             headers() {
                 if (adminSecret) {
                     return {
